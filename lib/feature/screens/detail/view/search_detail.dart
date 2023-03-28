@@ -20,88 +20,38 @@ class SearchDetailView extends StatefulWidget {
 }
 
 class _SearchDetailViewState extends State<SearchDetailView> {
-  bool _isPressed1 = true;
-  bool _isPressed2 = false;
-  bool _isPressed3 = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: PreferredSize(preferredSize: Size.fromHeight(60.h), child: const DetailAppBar()),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: 16.w,
-                right: 16.w,
-                top: 16.h,
-              ),
-              child: Column(children: [
+        resizeToAvoidBottomInset: false,
+        appBar: PreferredSize(preferredSize: Size.fromHeight(60.h), child: const DetailAppBar()),
+        body: SingleChildScrollView(
+            child: Column(children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: 16.w,
+              right: 16.w,
+              top: 16.h,
+            ),
+            child: Column(
+              children: [
                 DetailExplanation(
-                  onPressed1: () {
-                    setState(() {
-                      _isPressed1 = true;
-                      _isPressed2 = false;
-                      _isPressed3 = false;
-                    });
-                  },
-                  onPressed2: () {
-                    setState(() {
-                      _isPressed1 = false;
-                      _isPressed2 = true;
-                      _isPressed3 = false;
-                    });
-                  },
-                  onPressed3: () {
-                    setState(() {
-                      _isPressed1 = false;
-                      _isPressed2 = false;
-                      _isPressed3 = true;
-                    });
-                  },
+                  onPressed1: () {},
+                  onPressed2: () {},
+                  onPressed3: () {},
                 ),
-                Visibility(
-                  visible: _isPressed1,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 32.h),
-                    child: const ExplanationColumn(),
-                  ),
+                Padding(
+                  padding: EdgeInsets.only(top: 32.h),
+                  child: const ExplanationColumn(),
                 ),
-              ]),
-            ),
-            Visibility(
-              visible: _isPressed1,
-              child: Padding(
-                padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 32.h),
-                child: const DetailCardListViewBuilder(),
-              ),
-            ),
-            Visibility(
-                visible: _isPressed2,
-                child: Padding(
+                Padding(
                   padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 32.h),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    color: Colors.red,
-                  ),
-                )),
-            Visibility(
-                visible: _isPressed3,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 32.h),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    color: Colors.green,
-                  ),
-                ))
-          ],
-        ),
-      ),
-    );
+                  child: const DetailCardListViewBuilder(),
+                )
+              ],
+            ),
+          ),
+        ])));
   }
 }
 

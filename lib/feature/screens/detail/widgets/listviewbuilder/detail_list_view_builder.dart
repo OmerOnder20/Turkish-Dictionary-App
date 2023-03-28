@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:tdk_app/feature/screens/detail/view/model/kelime_model.dart';
+import 'package:tdk_app/product/model/kelime_model.dart';
 
 import '../../../../../product/utility/colors/colors.dart';
 import '../../../../../product/utility/sizes/font_sizes.dart';
@@ -47,7 +47,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    datas?[index].atasozu?[index].madde ?? "",
+                                    "1",
                                     style: TextStyle(
                                         color: ColorUtility.textParagraph2,
                                         fontSize: FontSizes.font14,
@@ -57,7 +57,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                                     padding: EdgeInsets.only(left: 8.w),
                                     child: Text(
                                       //context.watch<KelimeProvider>().holderItems?[index].title ?? ""
-                                      datas?[index].lisan ?? "",
+                                      "İSİM",
                                       style: TextStyle(
                                           color: ColorUtility.tdkMain,
                                           fontSize: FontSizes.font12,
@@ -70,7 +70,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(left: 15.w, top: 8.h),
                                 child: Text(
-                                  "<sdasdasd",
+                                  "Yazma,çizme vb. işlerde kullanılan çeşitli biçimlerde ara:",
                                   style: TextStyle(
                                       color: ColorUtility.textHeading,
                                       fontSize: FontSizes.font14,
@@ -80,7 +80,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(left: 24.w, top: 12.h),
                                 child: Text(
-                                  "sadasd",
+                                  '"Katğı,kalem,mürekkep,hepsi masanın üstünedir."- Falih Rıfkı Atay',
                                   // '"Kâğıt, kalem, mürekkep, hepsi masanın üstündedir." - Falih Rıfkı Atay',
                                   style: TextStyle(
                                       color: ColorUtility.textParagraph2,
