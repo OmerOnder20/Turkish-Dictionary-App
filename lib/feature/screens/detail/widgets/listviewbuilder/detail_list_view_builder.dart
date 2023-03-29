@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:tdk_app/product/model/kelime_model.dart';
+import 'package:tdk_app/product/service/users_service.dart';
 
+import '../../../../../product/model/users_model.dart';
 import '../../../../../product/utility/colors/colors.dart';
 import '../../../../../product/utility/sizes/font_sizes.dart';
-import '../../viewModel/kelime_view_model.dart';
 
-class DetailCardListViewBuilder extends StatelessWidget {
+class DetailCardListViewBuilder extends StatefulWidget {
   const DetailCardListViewBuilder({super.key});
+
+  @override
+  State<DetailCardListViewBuilder> createState() => _DetailCardListViewBuilderState();
+}
+
+class _DetailCardListViewBuilderState extends State<DetailCardListViewBuilder> {
+  late final Future<List<UsersModel>?> futureFetch;
+  @override
+  void initState() {
+    super.initState();
+    futureFetch = context.read<UsersService>().fetchUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +39,8 @@ class DetailCardListViewBuilder extends StatelessWidget {
           ),
           child: SizedBox(
             width: double.infinity,
-            child: FutureBuilder<List<KelimeModel>?>(
-              future: context.watch<KelimeProvider>().fetchFutureKelime(),
+            child: FutureBuilder<List<UsersModel>?>(
+              future: futureFetch,
               builder: (context, snapshot) {
                 final datas = snapshot.data;
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -36,8 +48,9 @@ class DetailCardListViewBuilder extends StatelessWidget {
                 }
                 if (snapshot.connectionState == ConnectionState.done) {
                   return ListView.builder(
-                    itemCount: 5,
+                    itemCount: datas?.length,
                     itemBuilder: (BuildContext context, int index) {
+                      final datalar = datas?[index];
                       return Padding(
                         padding: EdgeInsets.only(top: 20.h),
                         child: Column(
@@ -47,7 +60,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "1",
+                                    datalar?.id.toString() ?? "",
                                     style: TextStyle(
                                         color: ColorUtility.textParagraph2,
                                         fontSize: FontSizes.font14,
@@ -57,7 +70,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                                     padding: EdgeInsets.only(left: 8.w),
                                     child: Text(
                                       //context.watch<KelimeProvider>().holderItems?[index].title ?? ""
-                                      "İSİM",
+                                      datalar?.name ?? "",
                                       style: TextStyle(
                                           color: ColorUtility.tdkMain,
                                           fontSize: FontSizes.font12,
@@ -70,7 +83,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(left: 15.w, top: 8.h),
                                 child: Text(
-                                  "Yazma,çizme vb. işlerde kullanılan çeşitli biçimlerde ara:",
+                                  datalar?.address?.street ?? "",
                                   style: TextStyle(
                                       color: ColorUtility.textHeading,
                                       fontSize: FontSizes.font14,
@@ -80,7 +93,7 @@ class DetailCardListViewBuilder extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(left: 24.w, top: 12.h),
                                 child: Text(
-                                  '"Katğı,kalem,mürekkep,hepsi masanın üstünedir."- Falih Rıfkı Atay',
+                                  datalar?.email ?? "",
                                   // '"Kâğıt, kalem, mürekkep, hepsi masanın üstündedir." - Falih Rıfkı Atay',
                                   style: TextStyle(
                                       color: ColorUtility.textParagraph2,

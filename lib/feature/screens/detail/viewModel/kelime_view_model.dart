@@ -1,61 +1,26 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:tdk_app/product/model/kelime_model.dart';
-import 'package:tdk_app/product/model/users_model.dart';
+import 'package:tdk_app/product/service/kelime_service.dart';
+
+import '../../../../product/model/users_model.dart';
 
 // import '../model/kelime_model.dart';
-import '../../../../product/model/Products_model.dart';
 
 class KelimeProvider extends ChangeNotifier {
-  @override
-  Future<List<UsersModel>?> usersFutureFetch() async {
-    try {
-      final usersUrl = Uri.parse("https://jsonplaceholder.typicode.com/users");
-      final response = await http.get(usersUrl);
-      if (response.statusCode == 200) {
-        var responseBody = jsonDecode(response.body);
-        if (responseBody is List) {
-          return responseBody.map((e) => UsersModel.fromJson(e)).toList();
-        }
-      }
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
+  // final KelimeService kelimeService;
+  // bool isLoading = false;
+  // List<UsersModel>? usersItem;
 
-  @override
-  Future<ProductsModel?> fetchFutureProducts() async {
-    try {
-      final url = Uri.parse("https://dummyjson.com/products");
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final responseBody = jsonDecode(response.body);
+  // KelimeProvider(this.kelimeService) {
+  //   kelimeCek();
+  // }
 
-        if (responseBody is Map<String, dynamic>) {
-          return ProductsModel.fromJson(responseBody);
-        }
-      }
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
+  // void changeLoading() {
+  //   isLoading = !isLoading;
+  // }
 
-  Future<List<KelimeModel>?> fetchFutureKelime() async {
-    try {
-      final url = Uri.parse("https://sozluk.gov.tr/gts?ara=kelime");
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final responseBody = jsonDecode(response.body);
-        if (responseBody is List) {
-          return responseBody.map((e) => KelimeModel.fromJson(e)).toList();
-        }
-      }
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
+  // Future<void> kelimeCek() async {
+  //   changeLoading();
+  //   usersItem = await kelimeService.getUsers();
+  //   changeLoading();
+  // }
 }

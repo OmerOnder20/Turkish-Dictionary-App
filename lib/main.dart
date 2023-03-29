@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tdk_app/product/navigator/app_router.dart';
 import 'package:provider/provider.dart';
+import 'package:tdk_app/product/service/users_service.dart';
 
 import 'feature/screens/detail/viewModel/kelime_view_model.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<KelimeProvider>(
-      create: (context) => KelimeProvider(),
-      builder: (context, child) => MyApp(),
-    )
-  ]));
+  runApp(MultiProvider(
+    providers: [
+      Provider<UsersService>(
+        create: (context) => UsersService(),
+      ),
+      ChangeNotifierProvider<KelimeProvider>(
+        create: (context) => KelimeProvider(),
+      )
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
